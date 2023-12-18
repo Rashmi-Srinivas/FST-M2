@@ -1,13 +1,25 @@
-version: '3' 
+version: '3'
 services:
-    redis-server:
-        image: 'redis'
-        volumes:
-           - ./data:/data
-        command: ["redis-server", "--save", "1 1"]
-    node-app:
-        restart: always
-        image: "rashmis4/visits"
-        build: .
+    # Postgres Database
+    postgres:
+        image: 'postgres:latest'
+        environment:
+            - POSTGRES_USERNAME=postgres
+            - POSTGRES_PASSWORD=postgres_password
+            - POSTGRES_DB=simple_blog_api
+    # Database Server    
+    api:
+        depends_on:
+            - postgres-db
+        build: 
+          context: ./
+          dockerfile: Dockerfile.dev
+        image: "rashmis4/simpleblog_api"
+        environment:
+            - POSTGRES_HOST=postgres-db
+            - POSTGRES_PORT=5432
+            - POSTGRES_DB=simple_blog_api
+            - POSTGRES_USERNAME=postgres
+            - POSTGRES_PASSWORD=postgres_password
         ports:
-            - "8081:8081"
+            - "3000:3000"
