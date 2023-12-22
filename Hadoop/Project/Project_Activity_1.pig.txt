@@ -1,7 +1,7 @@
 -- Load data from HDFS
-inputdialogues4 = LOAD 'hdfs:///user/rashmi/inputs/episodeIV_dialogues.txt' USING Pigstorage('\t') AS (name:chararray, line: chararray);
-inputdialogues5 = LOAD 'hdfs:///user/rashmi/inputs/episodeV_dialogues.txt' USING Pigstorage('\t') AS (name:chararray, line: chararray);
-inputdialogues6 = LOAD 'hdfs:///user/rashmi/inputs/episodeVI_dialogues.txt' USING Pigstorage('\t') AS (name:chararray, line: chararray);
+inputdialogues4 = LOAD 'hdfs:///user/rashmi/inputs/episodeIV_dialogues.txt' USING PigStorage('\t') AS (name:chararray, line: chararray);
+inputdialogues5 = LOAD 'hdfs:///user/rashmi/inputs/episodeV_dialogues.txt' USING PigStorage('\t') AS (name:chararray, line: chararray);
+inputdialogues6 = LOAD 'hdfs:///user/rashmi/inputs/episodeVI_dialogues.txt' USING PigStorage('\t') AS (name:chararray, line: chararray);
 
 -- Filter put the fiest 2 lines from each file
 ranked4 = RANK inputdialogues4;
